@@ -54,6 +54,9 @@
 (defn class-to-jsonld [^OWLClass class]
   { (jsonld-name class) (named-to-jsonld class) } )
 
+(defn add-container-set [^OWLProperty property]
+  { "@container" (str "@set") })
+
 (defn jsonld-type-for-property [^OWLProperty property]
   (cond
     (instance? OWLObjectProperty property)
@@ -76,7 +79,9 @@
   { (jsonld-name property)
     (merge
            (jsonld-type-for-property property)
-           (named-to-jsonld property) ) } )
+           (named-to-jsonld property) 
+           (add-container-set property) ) } )
+
 
 (defn is-defined? [options ^OWLEntity entity]
   ; Must be RDFS:isDefinedby one of the specified ontologies specified
