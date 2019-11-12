@@ -57,6 +57,7 @@
 (defn add-container-set [^OWLProperty property]
   { "@container" (str "@set") })
 
+
 (defn jsonld-type-for-property [^OWLProperty property]
   (cond
     (instance? OWLObjectProperty property)
@@ -102,6 +103,8 @@
             {}
             (if (:classes options) (apply merge (map class-to-jsonld
                                                      (only-valid options (owlapi/classes ontology)))))
+            (apply merge { "@id" (str "id") })
+            (apply merge { "@type" (str "type") })
             (if (:properties options)
              (if (:properties options)
                ;; Old
