@@ -103,8 +103,8 @@
             {}
             (if (:classes options) (apply merge (map class-to-jsonld
                                                      (only-valid options (owlapi/classes ontology)))))
-            (apply merge { "@id" (str "id") })
-            (apply merge { "@type" (str "type") })
+            (apply merge { "id" (str "@id") })
+            (apply merge { "type" (str "@type") })
             (if (:properties options)
              (if (:properties options)
                ;; Old
